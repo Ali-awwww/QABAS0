@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -16,10 +17,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.qabas.core.CompassManager
-import com.qabas.feature.knowledge.KnowledgeScreen
-import com.qabas.feature.mihrab.MihrabScreen
-import com.qabas.ui.theme.CompassGold
 
 @Composable
 fun QabasApp() {
@@ -57,7 +54,6 @@ fun QabasApp() {
                         }
                     }
                 )
-                // FAB الذهبي في المنتصف
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.EmojiNature, contentDescription = "الأثر") },
                     label = { Text("الأثر") },
@@ -75,10 +71,9 @@ fun QabasApp() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    CompassManager.updateState("مرحلة التوجيه", "compass")
                     navController.navigate("compass")
                 },
-                containerColor = CompassGold,
+                containerColor = Color(0xFFECC156),
                 contentColor = Color.Black
             ) {
                 Icon(Icons.Default.Explore, contentDescription = "البوصلة")
@@ -93,12 +88,24 @@ fun QabasApp() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            composable("compass") { CompassScreen(navController) }
-            composable("mihrab") { MihrabScreen() }
-            composable("knowledge") { KnowledgeScreen() }
+            composable("compass") { 
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "✨ البوصلة الذهبية ✨", color = Color(0xFFECC156))
+                }
+            }
+            composable("mihrab") { 
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "🕌 المحراب", color = Color(0xFF52865E))
+                }
+            }
+            composable("knowledge") { 
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "📚 طلب العلم", color = Color(0xFF3EA5AA))
+                }
+            }
             composable("impact") { 
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
-                    Text(text = "وحدة الأثر (قيد الإنشاء)", color = Color.White)
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "🌱 الأثر", color = Color(0xFFBC9D4B))
                 }
             }
         }
